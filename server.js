@@ -53,3 +53,39 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+const FlashcardConfig = require('./flashcardModel');
+
+// Save flashcard configuration
+app.post('/saveFlashcards', async (req, res) => {
+    const { username, configName, flashcards, connections } = req.body;
+    try {
+      let config = await FlashcardConfig.findOne({ username, configName });
+      if (config) {
+        config.flashcards = flashcards;
+        config.connections = connections;
+      } else {
+        config = new FlashcardConfig({ username, configName, flashcards, connections });
+      }
+      await config.save();
+      res.status(200).send(`Configuration "${configName}" saved`);
+    } catch (error) {
+      res.status(500).send('Error saving configuration');
+    }
+  });
+  
+
+// Get flashcard configuration
+app.get('/getFlashcards/:username', async (req, res) => {
+    try {
+      const configs = await FlashcardConfig.find({ username: req.params.username });
+      if (configs) {
+        res.json(configs);
+      } else {
+        res.status(404).send('Configurations not found');
+      }
+    } catch (error) {
+      res.status(500).send('Error retrieving configurations');
+    }
+  });
+  

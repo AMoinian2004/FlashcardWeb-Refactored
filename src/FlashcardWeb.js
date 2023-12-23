@@ -2,16 +2,40 @@ import React, { useState } from 'react';
 import './style.css';
 import FlashcardContainer from './FlashcardContainer';
 
-function FlashcardWeb() {
-  const [flashcards, setFlashcards] = useState([]);
-  const [connections, setConnections] = useState([]);
+function FlashcardWeb({ config }) {
+  const [flashcards, setFlashcards] = useState(config ? config.flashcards : []);
+  const [connections, setConnections] = useState(config ? config.connections : []);
 
   const addFlashcard = () => {
-    setFlashcards([...flashcards, { frontText: '', backText: '', id: Date.now() }]);
+    setFlashcards([...flashcards, { frontText: '', backText: '', id: Date.now(), x: 0, y: 0 }]);
   };
 
-  const saveFlashcards = () => {
-    localStorage.setItem('flashcardsData', JSON.stringify({ flashcards, connections }));
+  const saveFlashcards = async () => {
+    const configName = prompt("Enter a name for this flashcard configuration:");
+    if (!configName) {
+      alert("Saving cancelled. Please provide a name.");
+      return;
+    }
+
+    try {
+      const username = localStorage.getItem('username');
+      const response = await fetch('/saveFlashcards', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, configName, flashcards, connections }),
+      });
+
+      if (response.ok) {
+        alert(`Flashcards saved as "${configName}"!`);
+      } else {
+        alert('Failed to save flashcards.');
+      }
+    } catch (error) {
+      console.error('Error saving flashcards:', error);
+      alert('An error occurred while saving flashcards.');
+    }
   };
 
   const clearCanvas = () => {

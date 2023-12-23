@@ -23,6 +23,7 @@ function App() {
       if (response.ok) {
         setIsLoggedIn(true);
         setMessage('');
+        localStorage.setItem('username', username);
       } else {
         setMessage('Failed to login. Please check your credentials.');
       }

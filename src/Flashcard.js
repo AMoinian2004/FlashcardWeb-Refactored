@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 
-function Flashcard({ dataId, frontText, backText, onDrag, onDelete, onDoubleClick }) {
+function Flashcard({ dataId, frontText, backText, onDrag, onDelete, onDoubleClick, x, y }) {
   const [isFlipped, setIsFlipped] = useState(false);
   const flashcardRef = useRef(null);
 
@@ -19,7 +19,7 @@ function Flashcard({ dataId, frontText, backText, onDrag, onDelete, onDoubleClic
       onMouseDown={startDrag} 
       onDoubleClick={() => onDoubleClick(dataId)} 
       data-id={dataId} 
-      style={{ position: 'absolute' }}
+      style={{ position: 'absolute', left: `${x}px`, top: `${y}px` }}
     >
       <div className="flashcard-content" style={{ transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)' }}>
         <div className="flashcard-front">

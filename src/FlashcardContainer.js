@@ -50,12 +50,20 @@ function FlashcardContainer({ flashcards, updateFlashcards, connections, setConn
             let newX = e.clientX - draggingCard.offsetX;
             let newY = e.clientY - draggingCard.offsetY;
 
-            // Ensuring the flashcard stays within the bounds of the container
             newX = Math.max(containerRect.left, Math.min(newX, containerRect.right - cardRect.width));
             newY = Math.max(containerRect.top, Math.min(newY, containerRect.bottom - cardRect.height));
 
             draggingCard.ref.current.style.left = `${newX - containerRect.left}px`;
             draggingCard.ref.current.style.top = `${newY - containerRect.top}px`;
+
+            const updatedFlashcards = flashcards.map(fc => {
+                if (fc.id === draggingCard.id) {
+                    return { ...fc, x: newX - containerRect.left, y: newY - containerRect.top };
+                }
+                return fc;
+            });
+
+            updateFlashcards(updatedFlashcards);
 
             setConnections(connections.map(conn => {
                 if (conn.startId === draggingCard.id || conn.endId === draggingCard.id) {
@@ -84,7 +92,7 @@ function FlashcardContainer({ flashcards, updateFlashcards, connections, setConn
             document.removeEventListener('mousemove', handleMouseMove);
             document.removeEventListener('mouseup', handleMouseUp);
         };
-    }, [draggingCard, connections]);
+    }, [draggingCard, connections, flashcards, updateFlashcards]);
 
     return (
         <div id="flashcardContainer">
@@ -109,6 +117,8 @@ function FlashcardContainer({ flashcards, updateFlashcards, connections, setConn
                     onDrag={onDrag}
                     onDelete={onDelete}
                     onDoubleClick={onDoubleClick}
+                    x={flashcard.x}
+                    y={flashcard.y}
                 />
             ))}
         </div>
