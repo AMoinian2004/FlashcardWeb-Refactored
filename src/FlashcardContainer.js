@@ -40,6 +40,16 @@ function FlashcardContainer({ flashcards, updateFlashcards, connections, setConn
         setConnections([...connections, { startId, endId, x1, y1, x2, y2 }]);
     };
 
+    const updateText = (id, side, newText) => {
+        const updatedFlashcards = flashcards.map(flashcard => {
+          if (flashcard.id === id) {
+            return { ...flashcard, [side + 'Text']: newText };
+          }
+          return flashcard;
+        });
+        updateFlashcards(updatedFlashcards);
+      };
+
     useEffect(() => {
         const handleMouseMove = (e) => {
             if (!draggingCard) return;
@@ -119,6 +129,7 @@ function FlashcardContainer({ flashcards, updateFlashcards, connections, setConn
                     onDoubleClick={onDoubleClick}
                     x={flashcard.x}
                     y={flashcard.y}
+                    updateText={updateText}
                 />
             ))}
         </div>

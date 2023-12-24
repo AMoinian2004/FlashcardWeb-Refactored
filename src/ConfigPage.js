@@ -56,7 +56,7 @@ function ConfigPage() {
             <ul className="config-list">
               {configurations.map((config, index) => (
                 <li key={index}>
-                  <button className="config-button-edit" onClick={() => handleSelectConfig(config)}>Edit Configuration {index + 1}</button>
+                  <button className="config-button-edit" onClick={() => handleSelectConfig(config)}>Edit {config.configName}</button>
                 </li>
               ))}
             </ul>
