@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import ConfigPage from './ConfigPage';
-import './style.css';
+import './styles/loginStyles.css';
+
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -55,25 +56,37 @@ function App() {
 
   const renderLoginForm = () => (
     <div>
-      <h2>Login</h2>
-      <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username" />
-      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
-      <button onClick={handleLogin}>Log In</button>
-      <button onClick={() => setIsSigningUp(true)}>Sign Up</button>
-      <p>{message}</p>
+      <div className="header">
+        <h1>Flashcard Web</h1>
+      </div>
+        <div className="form-container">
+            <h2>Login</h2>
+            <input className="input-field" type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username" />
+            <input className="input-field" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
+            <button className="form-button" onClick={handleLogin}>Log In</button>
+            <button className="form-button secondary" onClick={() => setIsSigningUp(true)}>Sign Up</button>
+            <p>{message}</p>
+        </div>
     </div>
   );
+  
 
   const renderSignupForm = () => (
     <div>
+      <div className="header">
+        <h1>Flashcard Web</h1>
+      </div>
+    <div className="form-container">
       <h2>Sign Up</h2>
-      <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username" />
-      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
-      <button onClick={handleSignup}>Create Account</button>
-      <button onClick={() => setIsSigningUp(false)}>Back to Login</button>
+      <input className="input-field" type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username" />
+      <input className="input-field" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
+      <button className="form-button" onClick={handleSignup}>Create Account</button>
+      <button className="form-button secondary" onClick={() => setIsSigningUp(false)}>Back to Login</button>
       <p>{message}</p>
     </div>
+    </div>
   );
+  
 
   return (
     <Router>

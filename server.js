@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const { connectDB } = require('./db');
-const User = require('./userModel');
+const User = require('./models/userModel');
 
 const app = express();
 app.use(express.json());
@@ -54,7 +54,7 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
-const FlashcardConfig = require('./flashcardModel');
+const FlashcardConfig = require('./models/flashcardModel');
 
 // Save flashcard configuration
 app.post('/saveFlashcards', async (req, res) => {

@@ -1,0 +1,90 @@
+
+.config-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.05);
+    margin: 20px auto;
+    width: 300px;
+    text-align: center;
+  }
+
+  .full-width-container {
+    width: auto;
+    max-width: 100%;
+    padding: 0;
+  }
+  
+  
+  
+  .config-header {
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .config-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .config-list li {
+    margin-bottom: 10px;
+  }
+  
+  .config-button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    background-color: #48BB78;
+    color: white;
+    transition: background-color 0.3s;
+  }
+  
+  .config-button:hover {
+    background-color: #2F855A;
+  }
+  
+
+  .config-button-edit {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    background-color: #6B46C1;
+    color: white;
+    transition: background-color 0.3s;
+  }
+  
+  .config-button-edit:hover {
+    background-color: #553C9A;
+  }
+  
+  .config-button-editor {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    background-color: #48BB78;
+    color: white;
+    transition: background-color 0.3s;
+  }
+  
+  .config-button-editor:hover {
+    background-color: #2F855A;
+  }
+  
+  .header {
+    background-color: #4C51BF;
+    color: #fff;
+    padding: 15px 20px;
+    text-align: center;
+    border-bottom: 4px solid #2a2e78;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+}

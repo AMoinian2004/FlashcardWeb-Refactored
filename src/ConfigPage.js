@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import FlashcardWeb from './FlashcardWeb'; // Adjust the path as needed
+import FlashcardWeb from './FlashcardWeb';
+import './styles/configStyles.css';
 
 function ConfigPage() {
   const [showEditor, setShowEditor] = useState(false);
@@ -29,6 +30,12 @@ function ConfigPage() {
     setShowEditor(true);
   };
 
+  const handleCloseEditor = () => {
+    setShowEditor(false);
+  };
+
+  
+
   const handleGoToEditor = () => {
     setSelectedConfig(null); // Reset selectedConfig when creating a new one
     setShowEditor(true);
@@ -36,25 +43,30 @@ function ConfigPage() {
 
   return (
     <div>
+        <div className="header">
+          <h1>Flashcard Web</h1>
+        </div>
+    <div className={showEditor ? "full-width-container" : "config-container"}>
       {!showEditor ? (
         <div>
-          <h2>Configuration Page</h2>
+          <h2 className="config-header">Configuration Page</h2>
           {configurations.length === 0 ? (
             <p>You have no saved configurations.</p>
           ) : (
-            <ul>
+            <ul className="config-list">
               {configurations.map((config, index) => (
                 <li key={index}>
-                  <button onClick={() => handleSelectConfig(config)}>Edit Configuration {index + 1}</button>
+                  <button className="config-button-edit" onClick={() => handleSelectConfig(config)}>Edit Configuration {index + 1}</button>
                 </li>
               ))}
             </ul>
           )}
-          <button onClick={handleGoToEditor}>Go to Flashcard Editor</button>
+          <button className="config-button-editor" onClick={handleGoToEditor}>Go to Flashcard Editor</button>
         </div>
       ) : (
-        <FlashcardWeb config={selectedConfig} />
+        <FlashcardWeb config={selectedConfig} onCloseEditor={handleCloseEditor} />
       )}
+    </div>
     </div>
   );
 }

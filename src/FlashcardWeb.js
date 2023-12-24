@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import './style.css';
+import './styles/flashcardWebStyles.css';
 import FlashcardContainer from './FlashcardContainer';
 
-function FlashcardWeb({ config }) {
+function FlashcardWeb({ config, onCloseEditor }) {
   const [flashcards, setFlashcards] = useState(config ? config.flashcards : []);
   const [connections, setConnections] = useState(config ? config.connections : []);
 
@@ -49,9 +49,6 @@ function FlashcardWeb({ config }) {
 
   return (
     <div>
-      <div className="header">
-        <h1>Flashcard Web</h1>
-      </div>
 
       <div className="instructions">
         <p>Welcome to the Flashcard Web!</p>
@@ -68,8 +65,9 @@ function FlashcardWeb({ config }) {
 
       <div className="button-container">
         <button onClick={addFlashcard} className="addFlashcardButton">Add Flashcard</button>
-        <button onClick={saveFlashcards} className="addFlashcardButton">Save</button>
+        <button onClick={saveFlashcards} className="addFlashcardButton">Save As</button>
         <button onClick={clearCanvas} className="addFlashcardButton">Clear Canvas</button>
+        <button onClick={onCloseEditor} className="addFlashcardButton">Back to Config Page</button>
       </div>
 
       <FlashcardContainer flashcards={flashcards} updateFlashcards={updateFlashcards} connections={connections} setConnections={setConnections} />
